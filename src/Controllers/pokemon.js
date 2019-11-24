@@ -3,10 +3,11 @@ const formRes = require ('../Helpers/formRes');
 
 module.exports = {
   getByName: (req, res) => {
-    //   const pokemonName = req.params.name;
-    const pokemonName = req.query.name;
+    if (req.error) {
+      res.json (req.error);
+    }
     pokemonModel
-      .getByName (pokemonName)
+      .getByName ()
       .then (response => formRes.getPokemon (res, response, 200))
       .catch (err => console.log (err));
   },

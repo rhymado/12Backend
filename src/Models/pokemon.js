@@ -1,11 +1,10 @@
 const db = require ('../Configs/db');
 
 module.exports = {
-  getByName: pokemonName => {
+  getByName: () => {
     return new Promise ((resolve, reject) => {
       db.query (
-        `SELECT * FROM pokemons WHERE name=?`,
-        [pokemonName],
+        `SELECT pokemons.id, pokemons.name, pokemons.image_url, categories.name AS category FROM pokemons JOIN categories ON categories.id = pokemons.category_id`,
         (err, response) => {
           if (!err) {
             resolve (response);
